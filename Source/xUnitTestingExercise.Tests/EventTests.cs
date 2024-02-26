@@ -33,11 +33,30 @@ namespace MyEvents.Tests
         }
 
         [Fact]
-        public void RegisterAttendee_ReturnsFalse_WhenEventIsFull()
+        public void RegisterAttendee_ReturnsFalse_WhenEventIsInactive()
         {
-            var evnt = new Event("Code Workshop", "Workshop", 0); // Event is already full
+            var evnt = new Event("Code Workshop", "Workshop", 0);
+            evnt.Cancel();
             bool registrationResult = evnt.RegisterAttendee();
             Assert.False(registrationResult);
+        }
+
+        [Fact]
+        public void RemoveAttendee_ReturnsFalse_WhenNoPeopleRegistered()
+        {
+            var evnt = new Event("Code Workshop", "Workshop", 2);
+            bool removalResult = evnt.RemoveAttendee();
+            Assert.False(removalResult);
+        }
+
+        [Fact] 
+        public void RemoveAttendee_DeductsFromWaitingList_WhenWaitingListIsEmpty()
+        {
+            var evnt = new Event("Code Workshop", "Workshop", 5);
+            evnt.RegisterAttendee();
+            evnt.RemoveAttendee();
+            // registered and removed attendee, no one should have been removed from the waiting list so it should be at zero
+            Assert.True(evnt.waitingList == 0);
         }
     }
 }
