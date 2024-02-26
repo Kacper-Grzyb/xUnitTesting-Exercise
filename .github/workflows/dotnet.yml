@@ -22,10 +22,14 @@ jobs:
         dotnet-version: 8.0.x
     - name: Restore dependencies (xUnitTestingExercise)
       run: dotnet restore
-      working-directory: Source
+      working-directory: Source/xUnitTestingExercise
     - name: Build (xUnitTestingExercise)
       run: dotnet build --no-restore
       working-directory: Source/xUnitTestingExercise
-    - name: Test (xUnitTestingExercise)
+      
+    - name: Restore dependencies (xUnitTestingExercise.Tests)
+      run: dotnet restore
+      working-directory: Source/xUnitTestingExercise.Tests
+    - name: Test (xUnitTestingExercise.Tests)
       run: dotnet test
-      working-directory: Source/xUnitTestingExercise
+      working-directory: Source/xUnitTestingExercise.Tests
