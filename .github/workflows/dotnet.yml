@@ -20,7 +20,7 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 8.0.x
-    - name: Restore dependencies (xUnitTestingExercise.Tests)
+    - name: Restore dependencies ( '/home/runner/work/xUnitTesting-Exercise/Source/xUnitTestingExercise.Tests')
       run: dotnet restore
       working-directory: xUnitTestingExercise.Tests
     - name: Build (xUnitTestingExercise)
